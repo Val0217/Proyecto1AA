@@ -2,6 +2,144 @@
 <!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
+  <object class="GtkListStore" id="list1">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">horizontal left start</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">horizontal right start</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">vertical up start</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">vertical down start</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">diagonal down start</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">diagonal up start</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkWindow" id="window4">
+    <property name="name">window25</property>
+    <property name="can-focus">False</property>
+    <property name="resizable">False</property>
+    <property name="default-width">880</property>
+    <property name="default-height">500</property>
+    <signal name="destroy" handler="quit" swapped="no"/>
+    <child>
+      <!-- n-columns=3 n-rows=3 -->
+      <object class="GtkGrid">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <property name="label" translatable="yes">Select how to fill
+the square</property>
+            <property name="justify">center</property>
+            <attributes>
+              <attribute name="style" value="normal"/>
+              <attribute name="weight" value="bold"/>
+              <attribute name="foreground" value="#2e2ec2c27e7e"/>
+              <attribute name="size" value="26624"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">0</property>
+            <property name="width">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="but5">
+            <property name="label" translatable="yes">ENTER</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="halign">start</property>
+            <property name="image-position">bottom</property>
+            <signal name="clicked" handler="on_but5_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left-attach">2</property>
+            <property name="top-attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBox" id="combo1">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="model">list1</property>
+            <property name="has-entry">True</property>
+            <property name="entry-text-column">0</property>
+            <signal name="changed" handler="on_combo1_changed" object="entry2" swapped="no"/>
+            <child internal-child="entry">
+              <object class="GtkEntry" id="entry2">
+                <property name="can-focus">False</property>
+                <property name="primary-icon-stock">gtk-edit</property>
+                <property name="placeholder-text" translatable="yes">Select an item</property>
+                <signal name="changed" handler="on_entry2_changed" swapped="no"/>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">1</property>
+            <property name="height">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+          </object>
+          <packing>
+            <property name="left-attach">2</property>
+            <property name="top-attach">1</property>
+            <property name="height">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkWindow" id="window1">
     <property name="can-focus">False</property>
     <property name="resizable">False</property>
@@ -21,7 +159,7 @@
             <property name="vexpand">True</property>
             <property name="label" translatable="yes">Made by
 Jheyder López Artavia
-Valeria </property>
+Valeria Durán Muñoz</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
             <property name="ellipsize">end</property>
@@ -240,7 +378,7 @@ for the array size</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <child>
-          <!-- n-columns=0 n-rows=0 -->
+          <!-- n-columns=3 n-rows=3 -->
           <object class="GtkGrid" id="grid1">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
@@ -249,6 +387,33 @@ for the array size</property>
             <property name="column-spacing">10</property>
             <property name="row-homogeneous">True</property>
             <property name="column-homogeneous">True</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
           </object>
           <packing>
             <property name="left-attach">1</property>
@@ -367,16 +532,85 @@ for the array size</property>
           </packing>
         </child>
         <child>
-          <placeholder/>
+          <!-- n-columns=3 n-rows=3 -->
+          <object class="GtkGrid" id="gridrow">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="row-homogeneous">True</property>
+            <property name="column-homogeneous">True</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">1</property>
+          </packing>
         </child>
         <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
+          <!-- n-columns=3 n-rows=3 -->
+          <object class="GtkGrid" id="gridcol">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="row-homogeneous">True</property>
+            <property name="column-homogeneous">True</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">0</property>
+            <property name="width">3</property>
+          </packing>
         </child>
         <child>
           <placeholder/>
