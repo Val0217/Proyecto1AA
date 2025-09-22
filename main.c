@@ -3,7 +3,7 @@
 #include <time.h>
 #include <gtk/gtk.h>
 
-int *create_magic_square(int n);
+int* create_magic_square(int n);
 void rotate90(int *A, int n);
 void reflect_horizontal(int *A, int n);
 void random_transform(int *A, int n);
@@ -17,7 +17,6 @@ void on_entry1_insert_text(GtkEditable *editable,
 
 void on_entry1_changed(GtkEntry *e);
 
-
 GtkWidget *window1;
 GtkWidget *window2;
 GtkWidget *window3;
@@ -25,17 +24,18 @@ GtkWidget *window3;
 GtkWidget *label1;
 
 GtkWidget *grid;
-
+GtkWidget *label[100][100];
 GtkWidget *entry_number;
 GtkBuilder *builder;
-
-
+int *sq;
 
 
 GtkWidget *but02;
 char tmp[10];
 char temp[1024];
 int n;
+int fila;
+int columna;
 
 
 int main(int argc, char *argv[])
@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
 
 	builder = gtk_builder_new();
 	gtk_builder_add_from_file(builder, "Proyecto001.glade", NULL);
+    
 	
 	window1 = GTK_WIDGET(gtk_builder_get_object(builder, "window1"));
     window2 = GTK_WIDGET(gtk_builder_get_object(builder, "window2"));
@@ -56,14 +57,14 @@ int main(int argc, char *argv[])
 
 
     entry_number = GTK_WIDGET(gtk_builder_get_object(builder, "entry1"));
-    g_signal_connect(entry_number, "insert-text", G_CALLBACK(on_entry1_insert_text), NULL);
     but02 = GTK_WIDGET(gtk_builder_get_object(builder, "but02"));
+
+     but02 = GTK_WIDGET(gtk_builder_get_object(builder, "but02"));
 
 
     //g_signal_connect(but02, "on_but01_clicked", G_CALLBACK(on_but02_clicked), entry_number);
 	gtk_builder_connect_signals(builder, NULL);
 	g_object_unref(builder);
-
 
 	gtk_widget_show_all(window1);
 	gtk_main();
@@ -72,47 +73,71 @@ int main(int argc, char *argv[])
 }
 
 
-GtkWidget *label[100][100]; //global
+void on_but02_clicked(){
 
-void on_but02_clicked() {
     gtk_widget_hide(window2);
     char label_text[10];
     int row, col;
-
-    // Mostrar la ventana dinámica
+    // Show the dynamic grid window
     gtk_widget_show(GTK_WIDGET(window3));
+    sq = create_magic_square(atoi(tmp));
+    random_transform(sq, atoi(tmp));
 
-    int n = atoi(tmp);
-    int *sq = create_magic_square(n);
-    random_transform(sq, n);
+    gtk_grid_set_row_spacing(GTK_GRID(grid), 0);
+    gtk_grid_set_column_spacing(GTK_GRID(grid), 0);
+    gtk_container_set_border_width(GTK_CONTAINER(grid), 0);
 
-    // Crear y poner labels en la grilla
-    for (row = 0; row < n; row++) {
-        for (col = 0; col < n; col++) {
+
+    // Crear el provider de CSS
+    static GtkCssProvider *provider = NULL;
+    if (provider == NULL) {
+        provider = gtk_css_provider_new();
+        gtk_css_provider_load_from_data(provider,
+            ".magic-cell {"
+            "  border: 1px solid black;"
+            "  padding: 0px;"
+            "  margin: 0px;"
+            "  font-size: 14px;"
+            "  min-width: 30px;"
+            "  min-height: 30px;"
+            "  text-align: center;"
+            "}", -1, NULL);
+
+        gtk_style_context_add_provider_for_screen(
+            gdk_screen_get_default(),
+            GTK_STYLE_PROVIDER(provider),
+            GTK_STYLE_PROVIDER_PRIORITY_USER
+        );
+    }
+
+    // Create and attach labels to the grid
+    for (row = 0; row < atoi(tmp); row++) {
+        for (col = 0; col < atoi(tmp); col++) {
             label[row][col] = gtk_label_new(NULL);
-            sprintf(label_text, "%d", sq[row * n + col]);
-            gtk_label_set_text(GTK_LABEL(label[row][col]), label_text);
+            //sprintf(label_text, "%d", sq[row * atoi(tmp) + col]); // Format the text for the label
+            gtk_label_set_text(GTK_LABEL(label[row][col]), " ");
             gtk_label_set_justify(GTK_LABEL(label[row][col]), GTK_JUSTIFY_LEFT);
 
+            
+            GtkStyleContext *context = gtk_widget_get_style_context(label[row][col]);
+            gtk_style_context_add_class(context, "magic-cell");
+
+            
+            // Attach the label to the grid at the specified row and column
             gtk_grid_attach(GTK_GRID(grid), label[row][col], col, row, 1, 1);
             gtk_widget_show(label[row][col]);
         }
     }
 
-    free(sq);
+    fila  = (rand() % atoi(tmp));
+    columna  = (rand() % atoi(tmp));
+    sprintf(label_text, "%d", sq[fila * atoi(tmp) + columna]);
+    gtk_label_set_text(GTK_LABEL(label[fila][columna]), label_text);
+    gtk_widget_show(label[fila][columna]);
+ 
+
 }
 
-
-void on_but01_clicked(){
-    gtk_widget_hide(window1);
-    gtk_widget_show_all(window2);
-}
-
-
-void quit(){
-
-    gtk_main_quit();
-}
 
 // Filtro para que solo acepte dígitos en el GtkEntry
 void on_entry1_insert_text(GtkEditable *editable,
@@ -149,6 +174,32 @@ void on_entry1_changed(GtkEntry *e) {
     }
 }
 
+void on_but03_clicked(){
+   
+}
+
+void on_but04_clicked(){
+ char label_text[10];
+ int row, col;
+ for (row = 0; row < atoi(tmp); row++) {
+        for (col = 0; col < atoi(tmp); col++) {
+            sprintf(label_text, "%d", sq[row * atoi(tmp) + col]); // Format the text for the label
+            gtk_label_set_text(GTK_LABEL(label[row][col]), label_text);
+            gtk_widget_show(label[row][col]);
+        }
+    }
+   
+}
+void on_but01_clicked(){
+    gtk_widget_hide(window1);
+    gtk_widget_show_all(window2);
+}
+
+
+void quit(){
+    free(sq); 
+    gtk_main_quit();
+}
 /* Genera el cuadrado canonico de Kurosaka (siempre va a ser igual) */
 int *create_magic_square(int n) {
     if (n < 3 || (n % 2) == 0) return NULL;

@@ -96,6 +96,7 @@ Magicos</property>
     <property name="resizable">False</property>
     <property name="default-width">880</property>
     <property name="default-height">500</property>
+    <signal name="destroy" handler="quit" swapped="no"/>
     <child>
       <!-- n-columns=3 n-rows=5 -->
       <object class="GtkGrid">
@@ -232,6 +233,7 @@ for the array size</property>
     <property name="resizable">False</property>
     <property name="default-width">880</property>
     <property name="default-height">500</property>
+    <signal name="destroy" handler="quit" swapped="no"/>
     <child>
       <!-- n-columns=5 n-rows=4 -->
       <object class="GtkGrid">
@@ -242,8 +244,6 @@ for the array size</property>
           <object class="GtkGrid" id="grid1">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
             <property name="hexpand">True</property>
             <property name="vexpand">True</property>
             <property name="column-spacing">10</property>
@@ -257,28 +257,14 @@ for the array size</property>
           </packing>
         </child>
         <child>
-          <object class="GtkLabel">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="hexpand">True</property>
-            <property name="justify">center</property>
-            <property name="wrap">True</property>
-            <property name="ellipsize">end</property>
-          </object>
-          <packing>
-            <property name="left-attach">0</property>
-            <property name="top-attach">0</property>
-            <property name="width">5</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="but1">
+          <object class="GtkButton" id="but03">
             <property name="label" translatable="yes">ADD</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="valign">center</property>
             <property name="image-position">bottom</property>
+            <signal name="clicked" handler="on_but03_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="left-attach">1</property>
@@ -286,40 +272,18 @@ for the array size</property>
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="but3">
+          <object class="GtkButton" id="but04">
             <property name="label" translatable="yes">COMPLETE</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="valign">center</property>
             <property name="image-position">bottom</property>
+            <signal name="clicked" handler="on_but04_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="left-attach">3</property>
             <property name="top-attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-          </object>
-          <packing>
-            <property name="left-attach">0</property>
-            <property name="top-attach">1</property>
-            <property name="width">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <signal name="destroy" handler="quit" swapped="no"/>
-          </object>
-          <packing>
-            <property name="left-attach">3</property>
-            <property name="top-attach">1</property>
-            <property name="width">2</property>
           </packing>
         </child>
         <child>
@@ -388,7 +352,7 @@ for the array size</property>
             <property name="can-focus">False</property>
           </object>
           <packing>
-            <property name="left-attach">2</property>
+            <property name="left-attach">4</property>
             <property name="top-attach">2</property>
           </packing>
         </child>
@@ -398,9 +362,30 @@ for the array size</property>
             <property name="can-focus">False</property>
           </object>
           <packing>
-            <property name="left-attach">4</property>
+            <property name="left-attach">2</property>
             <property name="top-attach">2</property>
           </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
         </child>
       </object>
     </child>
