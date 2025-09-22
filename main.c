@@ -3,6 +3,12 @@
 #include <time.h>
 #include <gtk/gtk.h>
 
+int *create_magic_square(int n);
+void rotate90(int *A, int n);
+void reflect_horizontal(int *A, int n);
+void random_transform(int *A, int n);
+void print_matrix(int *A, int n);
+
 
 GtkWidget *window1;
 GtkWidget *window2;
@@ -64,9 +70,9 @@ void on_but02_clicked(){
 
     // Show the dynamic grid window
     gtk_widget_show(GTK_WIDGET(window3));
-   // int *sq = create_magic_square(atoi(tmp));
+    int *sq = create_magic_square(atoi(tmp));
 
-   // random_transform(sq, atoi(tmp));
+    random_transform(sq, atoi(tmp));
 
 
 
@@ -84,7 +90,7 @@ void on_but02_clicked(){
         }
     }
 
-    //free(sq);
+    free(sq);
 
 }
 
