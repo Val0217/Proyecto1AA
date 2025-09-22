@@ -1,7 +1,113 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <gtk/gtk.h>
 
+
+GtkWidget *window1;
+GtkWidget *window2;
+GtkWidget *window3;
+
+GtkWidget *label1;
+
+GtkWidget *grid;
+
+GtkWidget *entry_number;
+GtkBuilder *builder;
+
+
+
+
+GtkWidget *but02;
+char tmp[10];
+char temp[1024];
+int n;
+
+
+int main(int argc, char *argv[])
+{
+    srand((unsigned) time(NULL));
+	gtk_init(&argc, &argv);
+
+	builder = gtk_builder_new();
+	gtk_builder_add_from_file(builder, "Proyecto001.glade", NULL);
+	
+	window1 = GTK_WIDGET(gtk_builder_get_object(builder, "window1"));
+    window2 = GTK_WIDGET(gtk_builder_get_object(builder, "window2"));
+    window3 = GTK_WIDGET(gtk_builder_get_object(builder, "window3"));
+    grid = GTK_WIDGET(gtk_builder_get_object(builder, "grid1"));
+    
+
+    label1 = GTK_WIDGET(gtk_builder_get_object(builder, "label1"));
+
+
+    entry_number = GTK_WIDGET(gtk_builder_get_object(builder, "entry1"));
+    but02 = GTK_WIDGET(gtk_builder_get_object(builder, "but02"));
+
+
+    //g_signal_connect(but02, "on_but01_clicked", G_CALLBACK(on_but02_clicked), entry_number);
+	gtk_builder_connect_signals(builder, NULL);
+	g_object_unref(builder);
+
+
+	gtk_widget_show_all(window1);
+	gtk_main();
+
+	return 0;
+}
+
+
+void on_but02_clicked(){
+    gtk_widget_hide(window2);
+    char label_text[10];
+    int row, col;
+
+    // Show the dynamic grid window
+    gtk_widget_show(GTK_WIDGET(window3));
+   // int *sq = create_magic_square(atoi(tmp));
+
+   // random_transform(sq, atoi(tmp));
+
+
+
+    // Create and attach labels to the grid
+    for (row = 0; row < atoi(tmp); row++) {
+        for (col = 0; col < atoi(tmp); col++) {
+            GtkWidget *label = gtk_label_new(NULL);
+            sprintf(label_text, "%d %d", row, col); // Format the text for the label
+            gtk_label_set_text(GTK_LABEL(label), label_text);
+            gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+            
+            // Attach the label to the grid at the specified row and column
+            gtk_grid_attach(GTK_GRID(grid), label, col, row, 1, 1);
+            gtk_widget_show(label);
+        }
+    }
+
+    //free(sq);
+
+}
+
+
+void on_entry1_changed(GtkEntry *e){
+    
+    
+    sprintf(tmp, "%s", gtk_entry_get_text(e));
+    // Function to verify if valid
+    // Function to deactivate/Activate button when invalid/valid
+    gtk_label_set_text(GTK_LABEL(label1), tmp);
+}
+
+void on_but01_clicked(){
+    gtk_widget_hide(window1);
+    gtk_widget_show_all(window2);
+}
+
+
+void quit(){
+
+    gtk_main_quit();
+}
 /* Genera el cuadrado canonico de Kurosaka (siempre va a ser igual) */
 int *create_magic_square(int n) {
     if (n < 3 || (n % 2) == 0) return NULL;
@@ -82,7 +188,7 @@ void print_matrix(int *A, int n) {
     printf("\nConstante mágica: %ld\n\n", magic_constant);
 }
 
-int main(void) {
+int main1(void) {
     srand((unsigned) time(NULL));
 
     int side;
